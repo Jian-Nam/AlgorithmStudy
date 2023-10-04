@@ -1,0 +1,26 @@
+candidates = [2,3,6,7]
+target=7
+
+class Solution(object):
+    def combinationSum(self, candidates, target):
+        end = len(candidates)
+        prev = []
+        result = []
+
+        def dfs(start, sum):
+            if sum == target:
+                result.append(prev[:])
+                return 
+            elif start == end or sum>target:
+                return
+            
+            for i in range(start, end):
+                prev.append(candidates[i])
+                dfs(i, sum+candidates[i])
+                prev.pop()
+
+        dfs(0,0)
+        return result
+    
+s = Solution()
+s.combinationSum(candidates, target)
